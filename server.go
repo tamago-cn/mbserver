@@ -4,6 +4,7 @@ package mbserver
 import (
 	"io"
 	"net"
+	"os"
 
 	"github.com/goburrow/serial"
 )
@@ -14,6 +15,8 @@ type Server struct {
 	Debug            bool
 	listeners        []net.Listener
 	ports            []serial.Port
+	ptys             []*os.File
+	ttys             []*os.File
 	requestChan      chan *Request
 	function         [256](func(*Server, Framer) ([]byte, *Exception))
 	DiscreteInputs   []byte
