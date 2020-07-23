@@ -3,7 +3,6 @@ package mbserver
 
 import (
 	"io"
-	"log"
 	"net"
 	"os"
 
@@ -89,7 +88,6 @@ func (s *Server) handler() {
 	for {
 		request := <-s.requestChan
 		response := s.handle(request)
-		log.Printf("master send: [%v]\n", FormatBytes(response.Bytes()))
 		request.conn.Write(response.Bytes())
 	}
 }
