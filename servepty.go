@@ -38,8 +38,6 @@ func (s *Server) acceptPtyRequests(port io.ReadWriteCloser) {
 			// Set the length of the packet to the number of read bytes.
 			packet := buffer[:bytesRead]
 
-			log.Printf("master recv: [%v]\n", FormatBytes(packet))
-
 			frame, err := NewRTUFrame(packet)
 			if err != nil {
 				log.Printf("bad serial frame error %v\n", err)
