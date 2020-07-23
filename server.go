@@ -100,9 +100,9 @@ func (s *Server) Close() {
 	for _, port := range s.ports {
 		port.Close()
 	}
-	for _, f := range s.ptys {
-		f.Close()
-	}
+	//for _, f := range s.ptys {
+	//	f.Close()
+	//}
 	for _, f := range s.ttys {
 		f.Close()
 	}
