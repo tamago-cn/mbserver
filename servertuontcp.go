@@ -26,11 +26,12 @@ func (s *Server) ListenRTUonTCP(addr string) error {
 	return nil
 }
 
-func (s *Server) acceptRTUTCPRequests(port io.ReadWriteCloser) {
+func (s *Server) acceptRTUTCPRequests(conn io.ReadWriteCloser) {
+	defer conn.Close()
 	for {
 		buffer := make([]byte, 512)
 
-		bytesRead, err := port.Read(buffer)
+		bytesRead, err := conn.Read(buffer)
 		if err != nil {
 			if err != io.EOF {
 				log.Printf("serial read error %v\n", err)
@@ -49,7 +50,7 @@ func (s *Server) acceptRTUTCPRequests(port io.ReadWriteCloser) {
 				return
 			}
 
-			request := &Request{port, frame}
+			request := &Request{conn, frame}
 
 			s.requestChan <- request
 		}
