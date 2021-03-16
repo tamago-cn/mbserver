@@ -6,6 +6,7 @@ import "encoding/binary"
 type Framer interface {
 	Bytes() []byte
 	Copy() Framer
+	GetAddr() uint8
 	GetData() []byte
 	GetFunction() uint8
 	SetException(exception *Exception)

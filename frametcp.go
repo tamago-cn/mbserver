@@ -59,6 +59,11 @@ func (frame *TCPFrame) Bytes() []byte {
 	return bytes
 }
 
+// GetAddr returns the Modbus device addr.
+func (frame *TCPFrame) GetAddr() uint8 {
+	return frame.Device
+}
+
 // GetFunction returns the Modbus function code.
 func (frame *TCPFrame) GetFunction() uint8 {
 	return frame.Function
